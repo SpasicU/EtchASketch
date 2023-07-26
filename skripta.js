@@ -3,13 +3,44 @@
 const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("cell");
+const button = document.getElementById("velicina");
+const div = document.getElementsByTagName("div")[0];
+
+function gridSize(){
+  let size;
+  let text;
+  let p = prompt("Please the size:", "64");
+  if (p == null || p == "" || p > 100) {
+    text = "Your input was empty or too large, please try again.";
+    document.getElementById("text").innerHTML = text;
+  } else {
+    size = p;
+    //return size;
+  }
+  removeGrid(container);
+  defaultGrid(size);
+  
+}
+
+// had to add event delegation so it works wihout the need for page refresh
+div.addEventListener("click", (event) => {
+  if(event.target.tagName === 'BUTTON') {
+    gridSize();
+  }
+})
 
 
-defaultGrid();
-//Creates a default grid sized 16x16 
-function defaultGrid() {
-    makeRows(64);
-    makeColumns(64);
+//Creates a grid 
+function defaultGrid(size) {
+    makeRows(size);
+    makeColumns(size);
+}
+
+//removing all childrens from container, which means removing gridRows and thus removing the grid itself
+function removeGrid(parent){
+  while (parent.firstChild) {
+    parent.removeChild(container.firstChild);
+  }
 }
 
 //Takes (rows, columns) input and makes a grid
@@ -32,32 +63,6 @@ function makeColumns(cellNum) {
 
     };
 };
-// const grid = document.querySelector('.grid');
-// let gridValue = document.querySelector('.grid-size');
-// let gridSize = 32;
-// let squareSize = 8;
-
-// createGrid(squareSize);
-
-// // Create Squared Divs
-// function createDiv(size) {
-//   const div = document.createElement('div');
-//   div.classList.add('box');
-//   div.style.width = `${size}px`;
-//   div.style.height = `${size}px`;
-
-//   return div;
-// }
-
-// // Creat The Grid and append it to grid
-// function createGrid(gridSize) {
-//   for (let i = 0; i < gridSize; i++) {
-//     for (let j = 0; j < gridSize; j++) {
-//       grid.appendChild(createDiv(grid.clientWidth / gridSize));
-//     }
-//   }
-// }
-
 
 
 
