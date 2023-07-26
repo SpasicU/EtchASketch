@@ -64,9 +64,10 @@ function makeColumns(cellNum) {
     };
 };
 
-
-
-
-
-
-
+// Used event delegation to target children of the grid
+container.addEventListener('mouseover', function (e) {
+  // Add the "active" class to only divs with a "cell" class
+  if (e.target.matches('.cell')) {
+    e.target.classList.add('active');
+  }
+});
